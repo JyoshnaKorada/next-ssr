@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 
 type Row = {
-  id: number;
-  name: string;
+  Name: string;
 };
 
 export default function Home() {
@@ -26,9 +25,8 @@ export default function Home() {
             {row.name}
           </li>
         ))} */}
-        {data.map((row, i) => (
+        {data.map((row: Row, i) => (
           <li key={i} className="py-1">
-            {console.log(row)}
             {row.Name}
           </li>
         ))}

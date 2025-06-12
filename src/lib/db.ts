@@ -13,7 +13,7 @@ const config: sql.config = {
   },
 };
 
-export async function queryDatabase<T = any>(query: string): Promise<T[]> {
+export async function queryDatabase<T>(query: string): Promise<T[]> {
   try {
     console.log(query);
     const pool = await sql.connect(config);

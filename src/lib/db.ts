@@ -2,11 +2,11 @@
 import sql from "mssql";
 
 const config: sql.config = {
-  user: process.env.DB_USER!,
-  password: process.env.DB_PASS!,
-  server: process.env.DB_SERVER!,
-  port: parseInt(process.env.DB_PORT || "1433"),
-  database: process.env.DB_NAME!,
+  user: "lucyAdmin",
+  password: "we03vsLP0?*!9Y*!",
+  server: "sql-lucy-dev-eastus.database.windows.net",
+  port: 1433,
+  database: "db-lucy-dev-eastus",
   options: {
     encrypt: true,
     trustServerCertificate: true,

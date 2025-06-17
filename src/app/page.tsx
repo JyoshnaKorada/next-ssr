@@ -8,7 +8,7 @@ type Row = {
   email: string;
 };
 type Role = {
-  name: string;
+  Name: string;
 };
 
 export default function Home() {
@@ -50,7 +50,7 @@ export default function Home() {
         <ul className="mt-4">
           {roles.map((role: Role, i) => (
             <li key={i} className="py-1">
-              {role.name}
+              {role.Name}
             </li>
           ))}
         </ul>

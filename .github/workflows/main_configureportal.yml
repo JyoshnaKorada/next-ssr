@@ -1,4 +1,4 @@
-name: Build and deploy Next.js app to Azure Web App - configureportal
+name: Build and deploy Next.js SSR app to Azure Web App - configureportal
 
 on:
   push:
@@ -13,7 +13,8 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -26,9 +27,12 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Zip project (include hidden files)
+      - name: Remove dev dependencies
+        run: npm prune --production
+
+      - name: Zip production build
         run: |
-          zip -r release.zip . -x "node_modules/*"
+          zip -r release.zip .next node_modules public package.json next.config.js
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -49,10 +53,7 @@ jobs:
       - name: Unzip artifact
         run: unzip release.zip
 
-      - name: Install dependencies on deploy environment
-        run: npm install --omit=dev
-
-      - name: Start app (ensure startup command in Azure is correct)
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'configureportal'

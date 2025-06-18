@@ -32,13 +32,13 @@ jobs:
 
       - name: Zip production build
         run: |
-           zip -r release.zip . -x ".next/cache/*" -x "*.git*" 
+           zip next.zip ./* .next -qr
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: release.zip
+          path: next.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,12 +51,12 @@ jobs:
           name: node-app
 
       - name: Unzip artifact
-        run: unzip release.zip
+        run: unzip next.zip
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'configureportal'
           slot-name: 'Production'
-          package: .
+          package: next.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_370D344718CB4CE19A72A83EE753A6A8 }}

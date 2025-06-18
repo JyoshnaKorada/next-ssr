@@ -32,7 +32,7 @@ jobs:
 
       - name: Zip production build
         run: |
-          zip -r release.zip .next node_modules public package.json next.config.js
+          zip -r release.zip . -x "node_modules/*" -x ".next/cache/*" -x "*.git*"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
